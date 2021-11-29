@@ -32,19 +32,20 @@ class Spider(LrabbitSpider):
     # unique spider name
     spider_name = "lrabbit_blog"
     # max thread worker numbers
+    max_thread_num = 2
+    # is open for every thread a mysql connection,if your max_thread_num overpass 10 and  in code need mysql query ,you need open this config
     thread_mysql_open = True
-    max_thread_num = 5
-    # reset all task_list
-    reset_task_config = True
-    # open loop init_task_list
-    loop_task_config = True
-    # remove config option
-    remove_confirm_config = True
-    # config_path_name
+    # reset all task_list,every restart program will init task list
+    reset_task_config = False
+    # open loop init_task_list ,when your task is all finish,and you want again ,you can open it
+    loop_task_config = False
+    # remove config option,if open it,then confirm option when you init task
+    remove_confirm_config = False
+    # config_path_name, this is env name ,is this code ,you need in linux to execute: export config_path="crawl.ini"
     config_env_name = "config_path"
     # redis db_num
     redis_db_config = 0
-    # debug log
+    # debug log ,open tracback log
     debug_config = False
 
     def __init__(self):
@@ -57,10 +58,10 @@ class Spider(LrabbitSpider):
 
     def worker(self, *args):
         task = args[0]
-        # mysql_client: MysqlClient
-        # if len(args) == 2:
-        #     mysql_client = args[1]
-
+        mysql_client: MysqlClient
+        if len(args) == 2:
+            mysql_client = args[1]
+            # mysql_client.execute("")
         res = self.session.send_request(method='GET', url=f'http://www.lrabbit.life/post_detail/?id={task}')
         selector = Selector(res.text)
         title = selector.css(".detail-title h1::text").get()
@@ -71,10 +72,12 @@ class Spider(LrabbitSpider):
             # when you succes get content update redis stat
             self.update_stat_redis()
         LogUtils.log_finish(task)
-     
+
     def init_task_list(self):
-        # res = self.mysql_client.execute_query("select id from rookie limit 100 ")
-        # return [item['id'] for item in res]
+
+        # you can get init task from mysql
+        # res = self.mysql_client_pool.execute_query("select id from rookie limit 100 ")
+        # return [task['id'] for task in res]
         return [i for i in range(100)]
 
 
@@ -82,11 +85,10 @@ if __name__ == '__main__':
     spider = Spider()
     spider.run()
 
-
 ```
 
 * set config.ini and config env variable
-    * create crawl.ini forexam this file path is /root/crawl.ini
+    * create crawl.ini,for example this file path is /root/crawl.ini
     ```ini
   [server]
   mysql_user = root
@@ -116,8 +118,8 @@ if __name__ == '__main__':
 
 
 * python3 blog_spider.py
-* python3 blog_spider.py stat 
-    * show task stat 
+* python3 blog_spider.py stat
+    * show task stat
 
 Links
 -----
