@@ -73,7 +73,7 @@ class Spider(LrabbitSpider):
         LogUtils.log_finish(task)
      
     def init_task_list(self):
-        # res = self.mysql_client.query("select id from rookie limit 100 ")
+        # res = self.mysql_client.execute_query("select id from rookie limit 100 ")
         # return [item['id'] for item in res]
         return [i for i in range(100)]
 
@@ -116,6 +116,8 @@ if __name__ == '__main__':
 
 
 * python3 blog_spider.py
+* python3 blog_spider.py stat 
+    * show task stat 
 
 Links
 -----

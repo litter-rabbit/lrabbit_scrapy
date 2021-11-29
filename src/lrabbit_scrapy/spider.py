@@ -19,7 +19,7 @@ class LrabbitSpider:
     def __init__(self):
 
         self._init_config()
-        self.mysql_client = MysqlConnectionPool(config_path_env=self.config_env_name)
+        self.mysql_client_pool = MysqlConnectionPool(config_path_env=self.config_env_name)
         self.redis_client = RedisClient(config_path_env=self.config_env_name, db=self.redis_db_config)
         spider_task_key = f'list:{self.__getattribute__("spider_name")}'
         self.spider_name = self.__getattribute__("spider_name")

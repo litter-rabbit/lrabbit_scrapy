@@ -38,8 +38,8 @@ class RequestSession:
         return self.deal_res(res)
 
     def download_file_by_url(self, out_file_path, url, headers=None):
-        res = self.session.post(url=url, headers=headers, proxies=self.proxies, verify=False, stream=True,
-                                )
+        res = self.session.get(url=url, headers=headers, proxies=self.proxies, verify=False, stream=True,
+                               )
         with open(out_file_path, 'wb') as f:
             for chunk in res.iter_content(1024):
                 if chunk:

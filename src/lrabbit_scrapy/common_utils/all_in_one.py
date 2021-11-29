@@ -21,22 +21,10 @@ def get_time_format_now(option=1):
 
 class FileStore:
 
-    def __init__(self, file_path: str, filed_name: list, clear_content=False):
+    def __init__(self, file_path: str, filed_name: list):
         self.file_path = file_path
         self.file_name = os.path.splitext(file_path)
         self.filed_name = filed_name
-        self.clear_content = clear_content
-        self.write_headers()
-
-    def write_headers(self):
-        """
-        write headers
-        :return:
-        """
-        if self.clear_content:
-            with open(self.file_path, 'w', encoding='utf8', newline='') as f:
-                dict_write = csv.DictWriter(f, fieldnames=self.filed_name)
-                dict_write.writeheader()
 
     def write(self, d: dict):
         """
@@ -49,6 +37,13 @@ class FileStore:
         with open(self.file_path, 'a', encoding='utf8', newline='') as f:
             dict_write = csv.DictWriter(f, fieldnames=self.filed_name)
             dict_write.writerow(d)
+
+    def write_many(self, rows: [dict]):
+        if list(d.keys()) != self.filed_name:
+            raise ExceptionFileFieldNameError()
+        with open(self.file_path, 'a', encoding='utf8', newline='') as f:
+            dict_write = csv.DictWriter(f, fieldnames=self.filed_name)
+            dict_write.writerows(rows)
 
 
 if __name__ == '__main__':
