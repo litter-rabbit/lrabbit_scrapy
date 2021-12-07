@@ -14,7 +14,8 @@ quick start
 ----------------
 
 * create blog_spider.py
-
+* python3 -m lrabbit_scrapy new_scrapy blog
+    * this is file content
 ```python
 from lrabbit_scrapy.spider import LrabbitSpider
 from lrabbit_scrapy.common_utils.network_helper import RequestSession
@@ -118,6 +119,8 @@ if __name__ == '__main__':
 
 
 * python3 blog_spider.py
+
+## other function
 * python3 blog_spider.py stat
     * show task stat
 * python3 -m lrabbit-scrapy sslpass
