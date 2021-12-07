@@ -24,8 +24,6 @@ def sslbypass(server_name='15.0.0'):
     frida_path = os.path.join(current_parent_path, 'sslpass.js')
     frida_hook_cmd = f"frida -FU -l {frida_path} --no-pause"
     os.system(frida_hook_cmd)
-    subprocess.Popen(
-        ["frida", "-FU", "-l", frida_path, "--no-pause"])
 
 
 if __name__ == '__main__':

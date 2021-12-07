@@ -25,8 +25,8 @@ setuptools.setup(
         "requests >= 2.26.0",
         "PyMySQL >= 0.9.3",
         "redispy >= 3.0.0",
-        "frida == 15.0.0"
-        "frida-tools == 10.4.1"
+        "frida >= 15.0.0",
+        "frida-tools >= 10.4.1"
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
