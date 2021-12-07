@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from lrabbit_scrapy.common_utils.print_log_helper import LogUtils
+from lrabbit_scrapy.android.sslbypass import sslbypass
 
 base_dir = Path(__file__).resolve().parent
 
@@ -29,15 +30,18 @@ def copy_new_name_file(spider_name, new_name, src_name, is_config=False):
     f2.close()
 
 
-def run(argv, opts):
-    if argv != "newscrapy":
-        raise Exception(f'{argv} command not found,Do you mean lrabbit_spider newscrapy')
-    newspider(opts)
+def run(*args):
+    argv = args[0]
+    if argv == 'newscrapy':
+        opts = argv[1]
+        newspider(opts)
+    elif argv == 'sslpass':
+        sslbypass()
 
 
 if __name__ == '__main__':
     import sys
 
-    argv = sys.argv[1]
-    opts = sys.argv[2]
-    run(argv, opts)
+    argv = sys.argv[1:]
+    print(argv)
+    run(*argv)

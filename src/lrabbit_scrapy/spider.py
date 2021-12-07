@@ -7,7 +7,7 @@
 @Blog    : https://www.lrabbit.life
 """
 import traceback
-from lrabbit_scrapy.common_utils.mysql_helper import MysqlClient, MysqlConnectionPool
+from lrabbit_scrapy.common_utils.mysql_helper import MysqlClient
 from lrabbit_scrapy.common_utils.redis_helper import RedisClient
 from threading import Thread
 from lrabbit_scrapy.common_utils.all_in_one import get_time_format_now
@@ -19,7 +19,7 @@ class LrabbitSpider:
     def __init__(self):
 
         self._init_config()
-        self.mysql_client_pool = MysqlConnectionPool(config_path_env=self.config_env_name)
+        self.mysql_client = MysqlClient(config_path_env=self.config_env_name)
         self.redis_client = RedisClient(config_path_env=self.config_env_name, db=self.redis_db_config)
         spider_task_key = f'list:{self.__getattribute__("spider_name")}'
         self.spider_name = self.__getattribute__("spider_name")
@@ -33,21 +33,14 @@ class LrabbitSpider:
 
     def _init_config(self):
 
-        default_config = {
-            "thread_mysql_open": False,
-            "max_thread_num": 10,
-            "reset_task_config": False,
-            "loop_task_config": False,
-            "remove_confirm_config": False,
-            "config_env_name": "config_path",
-            "redis_db_config": 0,
-            "debug_config": True
-        }
-        for k, v in default_config.items():
-            try:
-                self.__getattribute__(k)
-            except Exception as e:
-                self.__setattr__(k, v)
+        self.thread_mysql_open = False
+        self.max_thread_num = 10
+        self.reset_task_config = False
+        self.loop_task_config = False
+        self.remove_confirm_config = False
+        self.config_env_name = "config_path"
+        self.redis_db_config = 0
+        self.debug_config = True
 
     def _send_task_redis(self, task_list):
         for task in task_list:
@@ -72,7 +65,6 @@ class LrabbitSpider:
             LogUtils.log_info("init task list")
             generate_task_list_callback = self.__getattribute__("init_task_list")
             if self.redis_client.redis_executor.exists(self.task_list_redis_key):
-
                 LogUtils.log_info("already exists", self.task_list_redis_key, "task list", "count",
                                   self.redis_client.redis_executor.scard(self.task_list_redis_key))
                 try:
@@ -180,7 +172,7 @@ class LrabbitSpider:
         options = sys.argv[1:]
         if len(options) > 0:
             if options[0] == 'stat':
-                LogUtils.log_info("remain task list", self.redis_client.redis_executor.scard(self.task_list_redis_key))
+                LogUtils.log_info("remain t ask list", self.redis_client.redis_executor.scard(self.task_list_redis_key))
                 print("\n")
                 day = get_time_format_now()
                 self.success_count_day_key = f"success:count:{self.spider_name}:{day}"
@@ -222,8 +214,10 @@ class LrabbitSpider:
                         break
                     self.redis_client.redis_executor.sadd(self.task_list_redis_key, task)
         LogUtils.log_now_time_str()
-        LogUtils.log_finish("抓取完毕")
+        LogUtils.log_finish("all finish")
 
 
 if __name__ == '__main__':
     spider = LrabbitSpider()
+
+

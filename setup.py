@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="lrabbit_scrapy",
-    version="2.0.4",
+    version="2.0.5",
     author="lrabbit",
     author_email="709343607@qq.com",
     description="this is a small spider,you can easy running. When you often need to crawl a single site, you don't have to redo some repeated code every time, using this small framework you can quickly crawl data into a file or database.",
@@ -24,9 +24,11 @@ setuptools.setup(
         "parsel == 1.6.0",
         "requests >= 2.26.0",
         "PyMySQL >= 0.9.3",
-        "redispy >= 3.0.0"
+        "redispy >= 3.0.0",
+        "frida == 15.0.0"
+        "frida-tools == 10.4.1"
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
-    python_requires=">=3.6",
+    python_requires=">=3.6.8",
 )

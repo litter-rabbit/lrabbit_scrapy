@@ -76,7 +76,7 @@ class Spider(LrabbitSpider):
     def init_task_list(self):
 
         # you can get init task from mysql
-        # res = self.mysql_client_pool.execute_query("select id from rookie limit 100 ")
+        # res = self.mysql_client.query("select id from rookie limit 100 ")
         # return [task['id'] for task in res]
         return [i for i in range(100)]
 
@@ -120,7 +120,8 @@ if __name__ == '__main__':
 * python3 blog_spider.py
 * python3 blog_spider.py stat
     * show task stat
-
+* python3 -m lrabbit-scrapy sslpass
+  * pass android ssl 
 Links
 -----
 
