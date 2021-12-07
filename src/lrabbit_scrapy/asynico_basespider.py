@@ -301,7 +301,7 @@ class BaseSpider(DbUtils, WriteUtil):
     """
 
     def __init__(self, spider_name: str):
-        # in windows spider_name maybe is .\crawl.py ,so we need trim it
+        # in windows spider_name maybe is .\asy_crawl.py ,so we need trim it
         if spider_name.startswith(".\\"):
             spider_name = spider_name.replace(".\\", "")
         spider_name = spider_name.split('.')[0]

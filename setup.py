@@ -20,6 +20,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+
     install_requires=[
         "parsel == 1.6.0",
         "requests >= 2.26.0",
@@ -28,8 +29,15 @@ setuptools.setup(
         "frida >= 15.0.0",
         "frida-tools >= 10.4.1"
     ],
-    package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
+    package_dir={"": "src"},
+    package_data={
+        # If any package contains *.txt files, include them:
+        "": ["*.js"],
+        # And include any *.dat files found in the "data" subdirectory
+        # of the "mypkg" package, also:
+    },
+    include_package_data=True,
     python_requires=">=3.6.8",
-    include_package_data=True
+
 )
