@@ -3,3 +3,4 @@ __pycache__/
 env
 .ini
 dist/*
+.egg-info

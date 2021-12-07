@@ -5,10 +5,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="lrabbit_scrapy",
-    version="2.0.5",
+    version="2.0.7",
     author="lrabbit",
     author_email="709343607@qq.com",
-    description="this is a small spider,you can easy running. When you often need to crawl a single site, you don't have to redo some repeated code every time, using this small framework you can quickly crawl data into a file or database.",
+    description="this is a small spider,you can easy running. When you often need to crawl a single site, you can reduce some repeated code every time, using this small framework you can quickly crawl data into a file or database.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/litter-rabbit/lrabbit_scrapy",
@@ -31,4 +31,5 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6.8",
+    include_package_data=True
 )
