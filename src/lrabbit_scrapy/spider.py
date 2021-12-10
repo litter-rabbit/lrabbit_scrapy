@@ -32,15 +32,38 @@ class LrabbitSpider:
         self.task_list = []
 
     def _init_config(self):
-
-        self.thread_mysql_open = False
-        self.max_thread_num = 10
-        self.reset_task_config = False
-        self.loop_task_config = False
-        self.remove_confirm_config = False
-        self.config_env_name = "config_path"
-        self.redis_db_config = 0
-        self.debug_config = True
+        try:
+            self.__getattribute__("thread_mysql_open")
+        except:
+            self.thread_mysql_open = False
+        try:
+            self.__getattribute__("max_thread_num")
+        except:
+            self.max_thread_num = 10
+        try:
+            self.__getattribute__("reset_task_config")
+        except:
+            self.reset_task_config = False
+        try:
+            self.__getattribute__("loop_task_config")
+        except:
+            self.loop_task_config = False
+        try:
+            self.__getattribute__("remove_confirm_config")
+        except:
+            self.remove_confirm_config = False
+        try:
+            self.__getattribute__("config_env_name")
+        except:
+            self.config_env_name = "config_path"
+        try:
+            self.__getattribute__("redis_db_config")
+        except:
+            self.redis_db_config = 0
+        try:
+            self.__getattribute__("debug_config")
+        except:
+            self.debug_config = True
 
     def _send_task_redis(self, task_list):
         for task in task_list:
@@ -219,5 +242,3 @@ class LrabbitSpider:
 
 if __name__ == '__main__':
     spider = LrabbitSpider()
-
-
