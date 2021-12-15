@@ -1,21 +1,24 @@
 lrabbit_scrapy
 =====
 
-this is a small spider,you can easy running. When you often need to crawl a single site, you don't have to redo some
-repeated code every time, using this small framework you can quickly crawl data into a file or database.
+this is a small spider,you can easy running.  you don't have to redo some repeated code every time, using this small framework you can quickly crawl data into a file or database.
 
+
+Requirements
+----------
+python >=3.6.8
 
 Installing
 ----------
 
-    $ pip install lrabbit_scrapy
+    $ pip3 install lrabbit_scrapy
 
 quick start
 ----------------
 
-* create blog_spider.py
+
 * python3 -m lrabbit_scrapy new_scrapy blog
-    * this is file content
+    * then will create a directory of blog,this is file content
 ```python
 from lrabbit_scrapy.spider import LrabbitSpider
 from lrabbit_scrapy.common_utils.network_helper import RequestSession
@@ -116,8 +119,7 @@ if __name__ == '__main__':
         * $env:config_path = "/root/crawl.ini"
         * linux
         * export config_path="/root/crawl.ini"
-
-
+        
 * python3 blog_spider.py
 
 ## other function
@@ -125,8 +127,6 @@ if __name__ == '__main__':
     * show task stat
 * python3 -m lrabbit-scrapy sslpass
   * pass android ssl 
-Links
------
-
+  
 - author: https://www.lrabbit.life/
 

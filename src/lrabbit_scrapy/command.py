@@ -42,7 +42,12 @@ def run(*args):
         print("opts", spider_name)
         new_template_spider(spider_name)
     elif argv == 'sslpass':
-        sslbypass()
+        if len(args) >= 2:
+            server_name = args[1]
+            print("firda server name")
+            sslbypass(server_name)
+        else:
+            sslbypass()
     elif argv == 'asy_new_scrapy':
         spider_name = args[1]
         print("opts", spider_name)
@@ -53,6 +58,5 @@ def run(*args):
 
 if __name__ == '__main__':
     import sys
-
     argv = sys.argv[1:]
     run(*argv)
