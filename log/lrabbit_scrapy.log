@@ -1,7 +1,0 @@
-MainThread|2022-02-01 16:28:25,962|test_log.py|<module>|line:5|INFO| test
-MainThread|2022-02-01 16:28:25,962|test_log.py|<module>|line:6|DEBUG| test
-MainThread|2022-02-01 16:28:25,963|test_log.py|<module>|line:7|ERROR| test
-MainThread|2022-02-01 16:28:25,963|test_log.py|<module>|line:8|CRITICAL| test
-MainThread|2022-02-01 16:28:25,963|test_log.py|<module>|line:9|WARNING| test
-MainThread|2022-02-01 16:28:25,963|test_log.py|<module>|line:10|ERROR| test
-MainThread|2022-02-01 16:28:25,963|test_log.py|<module>|line:11|WARNING| ['error']
